@@ -7,7 +7,7 @@ class Piece
   end
 
   def to_s
-    " #{symbol} "
+    " #{symbol}  "
   end
 
   def empty?
@@ -16,7 +16,9 @@ class Piece
   end
 
   def valid_moves
-
+    moves.reject do |move|
+      move_into_check?(move)
+    end
   end
 
   def pos=(val)
@@ -29,6 +31,8 @@ class Piece
 
   private
   def move_into_check?(end_pos)
-
+    validation_board = board.dup
+    validation_board.move_piece!(pos, end_pos)
+    validation_board.in_check?(color)
   end
 end

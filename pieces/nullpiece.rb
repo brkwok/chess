@@ -7,6 +7,10 @@ include Singleton
 
   end
 
+  def color
+
+  end
+  
   def moves
 
   end

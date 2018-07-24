@@ -38,6 +38,6 @@ class Display
     disp_board.each do |row|
       puts row.join("")
     end
-    puts "Use Arrow keys, WASD to move AND enter to select"
+    puts "Use Arrow keys, WASD to move AND enter to select a piece"
   end
 end

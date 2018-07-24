@@ -98,6 +98,6 @@ class Cursor
     new_pos = cursor_pos.map_with_index do |pos, idx|
       pos + diff[idx]
     end
-    @cursor_pos = new_pos if board.valid_pos(new_pos)
+    @cursor_pos = new_pos if board.valid_pos?(new_pos)
   end
 end
