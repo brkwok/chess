@@ -24,7 +24,7 @@ class Piece
   end
 
   def symbol
-    @color.to_s
+    raise NotImplementedError
   end
 
   private

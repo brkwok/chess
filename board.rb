@@ -1,5 +1,4 @@
 require_relative 'pieces'
-require 'byebug'
 
 class ChessGameError < StandardError; end
 class UserInputError < ChessGameError; end
@@ -34,9 +33,10 @@ class Board
   end
 
   def valid_pos?(pos)
-    row, col = pos
-    return false if row < 0 || row > 7 || col < 0 || col > 7
-    true
+    # row, col = pos
+    # return false if row < 0 || row > 7 || col < 0 || col > 7
+    # true
+    pos.all? { |position| position.between?(0, 7) }
   end
 
   private
