@@ -1,6 +1,6 @@
 require 'colorize'
-require_relative 'board.rb'
-require_relative 'cursor.rb'
+require_relative 'board'
+require_relative 'cursor'
 
 class Display
   attr_reader :board, :cursor, :selected_pos

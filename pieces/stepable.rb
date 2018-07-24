@@ -9,7 +9,7 @@ module SteppingPiece
 
       if board.empty?(pos)
         moves << pos
-      elsif board[pos].color != self.color
+      elsif board[pos].color != color
         moves << pos
       end
     end

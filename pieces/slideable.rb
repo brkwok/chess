@@ -45,7 +45,7 @@ module SlidingPiece
       if board.empty?(pos)
         moves << pos
       else
-        if board[pos].color != self.color
+        if board[pos].color != color
           moves << pos
         end
 

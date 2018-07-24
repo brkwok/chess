@@ -44,9 +44,9 @@ class Board
     @rows.each_with_index do |row, i|
       row.each_with_index do |col, j|
         if i == 0 || i == 1
-          self[[i, j]] = Piece.new(:B, @rows, [i, j])
+          self[[i, j]] = Piece.new(:black, @rows, [i, j])
         elsif i == 6 || i == 7
-          self[[i, j]] = Piece.new(:W, @rows, [i, j])
+          self[[i, j]] = Piece.new(:white, @rows, [i, j])
         else
           self[[i, j]] = @sentinel
         end

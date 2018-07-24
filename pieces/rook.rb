@@ -2,9 +2,10 @@ require_relative 'piece'
 require_relative 'slideable'
 
 class Rook < Piece
-  include Slideable
+  include SlidingPiece
+
   def symbol
-    "\u265C".colorize(self.color)
+    "\u265C".colorize(color)
   end
 
   private
