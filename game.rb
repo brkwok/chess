@@ -10,21 +10,42 @@ class Game
     @current_player = p1
   end
 
+  # def play
+  #   until board.checkmate?(current_player)
+  #     display.render
+  #     start_pos, end_pos = current_player.get_move
+  #     board.move_piece(current_player.color, start_pos, end_pos)
+  #     switch_player!
+  #     notify_player
+  #   end
+  # end
   def play
-    until board.checkmate?(current_player)
-      start_pos, end_pos = current_player.make_move
-      board.make_move(current_player.color, start_pos, end_pos)
-      switch_player!
-      notify_player
-    end
+    until board.checkmate?(current_player.color)
+      begin
+        start_pos, end_pos = current_player.get_move
+        board.move_piece(current_player.color, start_pos, end_pos)
+
+        switch_player!
+        notify_players
+      rescue UserInputError => e
+        e.message
+        retry
+      end
   end
+
+  display.render
+  puts "#{current_player} is checkmated."
+
+  nil
+end
+
 
   private
   def switch_player!
-    current_player == p1 ? current_player = p2 : current_player = p1
+    @current_player == p1 ? @current_player = p2 : @current_player = p1
   end
 
-  def notify_player
+  def notify_players
     if board.in_check?(current_player.color)
       puts "#{current_player.name} is in check!"
     else

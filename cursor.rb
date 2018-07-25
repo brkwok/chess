@@ -89,13 +89,14 @@ class Cursor
       selected_pos = cursor_pos
     when :up, :down, :left, :right
       update_pos(MOVES[key])
+      nil
     when :ctrl_c
       Process.exit(0)
     end
   end
 
   def update_pos(diff)
-    new_pos = cursor_pos.map_with_index do |pos, idx|
+    new_pos = cursor_pos.map.with_index do |pos, idx|
       pos + diff[idx]
     end
     @cursor_pos = new_pos if board.valid_pos?(new_pos)

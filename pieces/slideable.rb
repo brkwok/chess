@@ -1,12 +1,12 @@
 module SlidingPiece
-  HORIZONTAL = [
+  HORIZONTAL_DIRS = [
     [-1, 0],
     [1, 0],
     [0, 1],
     [0, -1]
   ].freeze
 
-  DIAGONAL = [
+  DIAGONAL_DIRS = [
     [1, 1],
     [1, -1],
     [-1, 1],
@@ -14,11 +14,11 @@ module SlidingPiece
   ].freeze
 
   def horizontal_dirs
-    HORIZONTAL
+    HORIZONTAL_DIRS
   end
 
   def diagonal_dirs
-    DIAGONAL
+    DIAGONAL_DIRS
   end
 
   def moves
@@ -33,22 +33,45 @@ module SlidingPiece
     raise NotImplementedError
   end
 
+  # def grow_unblocked_moves_in_dir(dx, dy)
+  #   cx, cy = pos
+  #   moves = []
+  #
+  #   loop do
+  #     cx, cy = cx + dx, cy + dy
+  #     pos = [cx, cy]
+  #
+  #     break if board.valid_pos?(pos)
+  #
+  #     if board.empty
+  #       moves << pos
+  #     else
+  #       if board[pos].color != color
+  #         moves << pos
+  #       end
+  #
+  #       break
+  #     end
+  #   end
+  #
+  #   moves
+  # end
   def grow_unblocked_moves_in_dir(dx, dy)
-    cx, cy = pos
+    cur_x, cur_y = pos
+    moves = []
+    loop do
+      cur_x, cur_y = cur_x + dx, cur_y + dy
+      pos = [cur_x, cur_y]
 
-    while true
-      cx, cy = cx + dx, cy + dy
-      pos = [cx, cy]
+      break unless board.valid_pos?(pos)
 
-      break if board.valid_pos?(pos)
-
-      if board.empty?(pos)
+      if board[pos].empty?
         moves << pos
       else
-        if board[pos].color != color
-          moves << pos
-        end
+        # can take an opponent's piece
+        moves << pos if board[pos].color != color
 
+        # can't move past blocking piece
         break
       end
     end

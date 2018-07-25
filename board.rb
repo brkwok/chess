@@ -1,4 +1,5 @@
 require_relative 'pieces'
+require 'byebug'
 
 class ChessGameError < StandardError; end
 class UserInputError < ChessGameError; end
@@ -14,13 +15,6 @@ class Board
   end
 
 
-  def move_piece(color, start_pos, end_pos)
-    raise UserInputError.new('Start position empty') if self[start_pos].class == NullPiece
-    raise UserInputError.new('Not a valid move') if start_pos == end_pos
-    raise UserInputError.new('You cannot put yourself in check') unless self[start_pos].valid_moves.include?(end_pos)
-
-    move_piece!(color, start_pos, end_pos)
-  end
 
   def [](pos)
     row, col = pos
@@ -30,6 +24,10 @@ class Board
   def []=(pos, val)
     row, col = pos
     @rows[row][col] = val
+  end
+
+  def empty?
+    self[pos].empty?
   end
 
   def valid_pos?(pos)
@@ -60,7 +58,7 @@ class Board
 
   def pieces
     @rows.flatten.reject do |piece|
-      piece.class == NullPiece
+      piece.empty?
     end
   end
 
@@ -75,8 +73,17 @@ class Board
     dup_board
   end
 
+
+  def move_piece(color, start_pos, end_pos)
+    raise UserInputError.new('Start position empty') if self[start_pos].empty?
+    raise UserInputError.new('Not a valid move') if start_pos == end_pos
+    raise UserInputError.new('You cannot put yourself in check') unless self[start_pos].valid_moves.include?(end_pos)
+
+    move_piece!(color, start_pos, end_pos)
+  end
+
   def move_piece!(color, start_pos, end_pos)
-    raise UserInputError.new("Invalid move") unless self[start_pos].moves.includes?(end_pos)
+    raise UserInputError.new("Invalid move") unless self[start_pos].moves.include?(end_pos)
 
     self[end_pos] = self[start_pos]
     self[start_pos] = @sentinel

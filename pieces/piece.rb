@@ -15,6 +15,10 @@ class Piece
     false
   end
 
+  def moves
+    raise NotImplementedError
+  end
+
   def valid_moves
     moves.reject do |move|
       move_into_check?(move)
@@ -32,7 +36,7 @@ class Piece
   private
   def move_into_check?(end_pos)
     validation_board = board.dup
-    validation_board.move_piece!(pos, end_pos)
+    validation_board.move_piece!(color, pos, end_pos)
     validation_board.in_check?(color)
   end
 end

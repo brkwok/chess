@@ -8,9 +8,9 @@ include Singleton
   end
 
   def color
-
+    "color"
   end
-  
+
   def moves
 
   end
