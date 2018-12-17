@@ -4,7 +4,7 @@ module SteppingPiece
     cx, cy = pos
 
     move_diffs.each do |el|
-      debugger
+
       dx, dy = el
       new_pos = [cx + dx, cy + dy]
 

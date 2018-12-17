@@ -41,7 +41,7 @@ class Pawn < Piece
   #   side_moves = [[x + forward_dir, y + 1], [x + forward_dir, y - 1]]
   #
   #   new_moves = side_moves.select do |move|
-  #     debugger
+  #
   #     board.valid_pos?(move) || board[move].class != NullPiece
   #     # if !board.valid_pos?(move)
   #     #   false
